@@ -19,29 +19,23 @@ public class OrderRepository {
         this.orderToPartnerMap = new HashMap<String, String>();
     }
 
-    public void saveOrder(Order order) throws Exception {
+    public void saveOrder(Order order){
         // your code here
         if(!orderMap.containsKey(order.getId())){
             orderMap.put(order.getId(), order);
         }
-        else{
-            throw new Exception();
-        }
     }
 
-    public void savePartner(String partnerId) throws Exception {
+    public void savePartner(String partnerId){
         // your code here
         // create a new partner with given partnerId and save it
         if(!partnerMap.containsKey(partnerId)){
             partnerMap.put(partnerId, new DeliveryPartner(partnerId));
             partnerToOrderMap.put(partnerId,new HashSet<String>());
         }
-        else{
-            throw new Exception();
-        }
     }
 
-    public void saveOrderPartnerMap(String orderId, String partnerId) throws Exception {
+    public void saveOrderPartnerMap(String orderId, String partnerId){
         if(orderMap.containsKey(orderId) && partnerMap.containsKey(partnerId)) {
             // your code here
             //add order to given partner's order list
@@ -54,19 +48,8 @@ public class OrderRepository {
                 DeliveryPartner partner = partnerMap.get(partnerId);
                 partner.setNumberOfOrders(partner.getNumberOfOrders() + 1);
                 orderToPartnerMap.put(orderId, partnerId);
-                System.out.println(orderMap);
-                System.out.println(partnerMap);
-                System.out.println(partnerToOrderMap);
-                System.out.println(orderToPartnerMap);
-            } else {
-                throw new Exception();
             }
-        }
-        else{
-            throw new Exception();
-        }
-
-
+       }
     }
 
     public Order findOrderById(String orderId){

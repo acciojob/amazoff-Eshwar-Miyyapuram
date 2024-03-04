@@ -23,24 +23,15 @@ public class OrderController {
     OrderService orderService;
     @PostMapping("/add-order")
     public ResponseEntity<String> addOrder(@RequestBody Order order){
-        try {
             orderService.addOrder(order);
             return new ResponseEntity<>("New order added successfully", HttpStatus.CREATED);
-        }catch (Exception e){
-            return new ResponseEntity<>("Order is Failed", HttpStatus.BAD_REQUEST);
-        }
     }
 
     @PostMapping("/add-partner/{partnerId}")
     public ResponseEntity<String> addPartner(@PathVariable String partnerId){
-
-        try{
             orderService.addPartner(partnerId);
 
             return new ResponseEntity<>("New delivery partner added successfully", HttpStatus.CREATED);
-        }catch(Exception e){
-            return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
-        }
 
 
     }
@@ -48,13 +39,9 @@ public class OrderController {
     @PutMapping("/add-order-partner-pair")
     public ResponseEntity<String> addOrderPartnerPair(@RequestParam String orderId, @RequestParam String partnerId){
 
-        try {
             //This is basically assigning that order to that partnerId
             orderService.createOrderPartnerPair(orderId, partnerId);
             return new ResponseEntity<>("New order-partner pair added successfully", HttpStatus.CREATED);
-        }catch (Exception e){
-            return new ResponseEntity<>("Order mapping to delivery partner has been failed",HttpStatus.BAD_REQUEST);
-        }
     }
 
 

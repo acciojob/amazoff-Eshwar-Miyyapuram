@@ -11,15 +11,15 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository = new OrderRepository();
 
-    public void addOrder(Order order) throws Exception {
+    public void addOrder(Order order){
         orderRepository.saveOrder(order);
     }
 
-    public void addPartner(String partnerId) throws Exception {
+    public void addPartner(String partnerId)  {
         orderRepository.savePartner(partnerId);
     }
 
-    public void createOrderPartnerPair(String orderId, String partnerId) throws Exception {
+    public void createOrderPartnerPair(String orderId, String partnerId)  {
         orderRepository.saveOrderPartnerMap(orderId, partnerId);
     }
 
