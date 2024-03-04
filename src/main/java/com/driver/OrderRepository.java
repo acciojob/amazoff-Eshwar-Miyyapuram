@@ -21,18 +21,14 @@ public class OrderRepository {
 
     public void saveOrder(Order order){
         // your code here
-        if(!orderMap.containsKey(order.getId())){
             orderMap.put(order.getId(), order);
-        }
     }
 
     public void savePartner(String partnerId){
         // your code here
         // create a new partner with given partnerId and save it
-        if(!partnerMap.containsKey(partnerId)){
             partnerMap.put(partnerId, new DeliveryPartner(partnerId));
             partnerToOrderMap.put(partnerId,new HashSet<String>());
-        }
     }
 
     public void saveOrderPartnerMap(String orderId, String partnerId){
