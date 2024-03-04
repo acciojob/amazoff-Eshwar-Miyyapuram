@@ -21,14 +21,18 @@ public class OrderRepository {
 
     public void saveOrder(Order order){
         // your code here
-            orderMap.put(order.getId(), order);
+            if(!orderMap.containsKey(order.getId())) {
+                orderMap.put(order.getId(), order);
+            }
     }
 
     public void savePartner(String partnerId){
         // your code here
         // create a new partner with given partnerId and save it
+        if(partnerMap.containsKey(partnerId)) {
             partnerMap.put(partnerId, new DeliveryPartner(partnerId));
-            partnerToOrderMap.put(partnerId,new HashSet<String>());
+            partnerToOrderMap.put(partnerId, new HashSet<String>());
+        }
     }
 
     public void saveOrderPartnerMap(String orderId, String partnerId){
@@ -37,14 +41,12 @@ public class OrderRepository {
             //add order to given partner's order list
             //increase order count of partner
             //assign partner to this order
-            if (!orderToPartnerMap.containsKey(orderId)) {
                 HashSet<String> orderList = partnerToOrderMap.get(partnerId);
                 orderList.add(orderId);
                 partnerToOrderMap.put(partnerId, orderList);
                 DeliveryPartner partner = partnerMap.get(partnerId);
                 partner.setNumberOfOrders(partner.getNumberOfOrders() + 1);
                 orderToPartnerMap.put(orderId, partnerId);
-            }
        }
     }
 
